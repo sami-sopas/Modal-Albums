@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CRUD Modal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  </head>
+  <body>
+    
+    <div class="container py-3">
+        <h2 class="text-center">Musica</h2>
+
+        <!-- lo meti en un row para poder centrar el boton mediante una fila -->
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                <a href="#" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill"></i>
+                    Nuevo registro</a>
+            </div>
+        </div>
+
+
+        <table class="table table-sm table-striped table-hover mt-4">
+            <thead> <!-- Encabezado de la tabla -->
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Genero</th>
+                    <th>Portada</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+
+            <tbody> <!-- Cuerpo de la tabla -->
+
+            </tbody>
+        </table>
+
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
+</html>

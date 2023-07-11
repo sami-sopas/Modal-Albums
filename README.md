@@ -1,0 +1,1 @@
+8:36 del video me quede, falta agregar bootstrap y eso
