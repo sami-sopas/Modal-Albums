@@ -89,7 +89,7 @@
   <?php include 'editModal.php' ?>
 
   <script>
-    //Codigo JS para detectar el evento cuando se muestra un modal para editar
+    //Codigo JS para detectar el evento cuando se muestra un modal para EDITAR
     let editModal = document.getElementById('editModal');
 
     //Le indicamos el evento

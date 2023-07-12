@@ -7,11 +7,9 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="save.php" method="post" enctype="multipart/form-data">
+            <form action="update.php" method="post" enctype="multipart/form-data">
 
-            <input type="hidden" id="id" name="id"> <!-- Aqui enviamos el ID para mandarlo a actualizar -->
-
-
+            <input type="hidden" id="id" name="id"> <!-- Aqui enviamos el ID para mandarlo a actualizar al update.php -->
 
               <!-- FORMULARIO -->
               <div class="mb-3"> <!-- Nombre -->
