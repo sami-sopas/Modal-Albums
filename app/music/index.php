@@ -37,8 +37,7 @@
         </a>
       </div>
     </div>
-    
-    <table class="table table-sm table-striped table-hover mt-4">
+    <table class="table table-sm table-striped table-hover mt-4 text-center">
       <thead> <!-- Encabezado de la tabla -->
         <tr>
           <th>#</th>
@@ -61,6 +60,11 @@
           <td> <?= $row_music['description']; ?> </td>
           <td> <?= $row_music['genre']; ?> </td>
           <td></td>
+          <td class="">
+            <a href="#" class="btn btn-primary" data-bs-id="<?= $row_music['id']; ?>" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square me-1"></i>Editar</a>
+
+            <a href="#" class="btn btn-danger"><i class="bi bi-trash3-fill me-1"></i></i>Eliminar</a>
+          </td>
         </tr>
         <?php } ?>
       </tbody>
@@ -79,6 +83,51 @@
 
   <!-- incluimos la ventana, es como si copiaramos el codigo del archivo y lo pegaramos aqui debajo -->
   <?php include 'newModal.php' ?>
+
+  <?php $genres->data_seek(0); ?> <!-- Para reiniciar el ciclo while del newModal y asi poder mostrar los generos en editModal -->
+
+  <?php include 'editModal.php' ?>
+
+  <script>
+    //Codigo JS para detectar el evento cuando se muestra un modal para editar
+    let editModal = document.getElementById('editModal');
+
+    //Le indicamos el evento
+    // "show.bs.modal" es cuando damos click al boton para abrir el modal
+    // "shown.bs.modal" es cuando terminan de cargar todos los elementos del modal
+    editModal.addEventListener('shown.bs.modal', event => {
+      let button = event.relatedTarget; //Para detectar a que boton se le dio click
+      let id = button.getAttribute('data-bs-id'); //Para pasar el id del registro que quiero modificar
+
+      //De la ventana modal, buscamos el elemento con la clase .modal-body con el elemento id
+      //De esta manera detectamos los demas datos
+      let inputId = editModal.querySelector('.modal-body #id');
+      let inputName = editModal.querySelector('.modal-body #name');
+      let inputDescription = editModal.querySelector('.modal-body #description');
+      let inputGenre = editModal.querySelector('.modal-body #genre');
+
+      //Peticion Ajax para pasar la informacion al modal
+      let url = "getSong.php";
+      let formData = new FormData();
+      formData.append('id',id); //Elementos que necesitamos enviar
+
+      //Esto es una peticion de forma nativa
+      fetch(url, {
+        method: "POST",
+        body: formData
+      }).then(response => response.json())
+      .then(data => { //La variable data ya contendra los datos del registro despues de la petision a getSong.php
+
+        inputId.value = data.id
+        inputName.value = data.name
+        inputDescription.value = data.description
+        inputGenre.value = data.id_genre
+
+      }).catch(err => console.log(err));
+
+    })
+
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
