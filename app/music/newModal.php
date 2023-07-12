@@ -23,6 +23,11 @@
                 <label for="genre" class="form-label">Genero:</label>
                 <select name="genre" id="genre" class="form-select" required>
                   <option value="">Seleccionar...</option>
+                  <?php //genres es la variable que tiene los registros en el index
+                        //fetch_assocc regresa un array de strings  $fila["id"], $fila["name"]?>
+                  <?php  while($row_genres = $genres->fetch_assoc()) { ?>
+                    <option value="<?php echo $row_genres["id"]; ?>"><?= $row_genres["name"] ?> </option>
+                 <?php } ?>
                 </select>
               </div>
 

@@ -1,3 +1,9 @@
+<?php
+  //Conexion a BD
+
+  require '../config/database.php';
+?>
+
 <!doctype html>
 <html lang="es">
 
@@ -46,6 +52,15 @@
     </table>
 
   </div>
+
+  <?php 
+
+    $sqlGenres = "SELECT id, name FROM genre"; //Query para traernos los generos
+
+    /* Usamos el objeto conexion de database.php, y le enviamos la query
+       para que nos regrese los generos */
+    $genres = $conn->query($sqlGenres);
+  ?>
 
   <!-- incluimos la ventana, es como si copiaramos el codigo del archivo y lo pegaramos aqui debajo -->
   <?php include 'newModal.php' ?>
