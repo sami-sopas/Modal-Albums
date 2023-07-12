@@ -11,7 +11,7 @@
     $description = $conn->real_escape_string($_POST['description']);
     $genre = $conn->real_escape_string($_POST['genre']);
 
-    $sql = "INSERT INTO song (name,description,id_genre,date)
+    $sql = "INSERT INTO music (name,description,id_genre,date)
      VALUES ('$name','$description','$genre',NOW())";
 
      if($conn->query($sql)){

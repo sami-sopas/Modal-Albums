@@ -2,6 +2,13 @@
   //Conexion a BD
 
   require '../config/database.php';
+
+  /* query para llenas las tablas con la informacion, usando un inner join
+     para ligar con la llave foranea (genero) */ 
+  $sqlMusic = "SELECT m.id, m.name, m.description,
+               g.name as genre FROM music AS m INNER JOIN genre AS g ON m.id_genre = g.id";
+
+  $music = $conn->query($sqlMusic);
 ?>
 
 <!doctype html>
@@ -19,9 +26,6 @@
 
   <div class="container py-3">
     <h2 class="text-center">Musica</h2>
-
-    
-
 
     <!-- Boton que llama a newModal (Ventana para agregar) -->
     <!-- lo meti en un row para poder centrar el boton mediante una fila -->
@@ -48,6 +52,17 @@
 
       <tbody> <!-- Cuerpo de la tabla -->
 
+      <?php /* Usar <?= ?> es el quivalente a usar <?php echo; ?> */ ?>
+
+      <?php while($row_music = $music->fetch_assoc()) {  ?>
+        <tr>
+          <th scope="row"> <?= $row_music['id']; ?> </th>
+          <td> <?= $row_music['name']; ?> </td>
+          <td> <?= $row_music['description']; ?> </td>
+          <td> <?= $row_music['genre']; ?> </td>
+          <td></td>
+        </tr>
+        <?php } ?>
       </tbody>
     </table>
 
