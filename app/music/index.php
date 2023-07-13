@@ -1,4 +1,6 @@
 <?php
+
+  session_start();
   //Conexion a BD
 
   require '../config/database.php';
@@ -26,6 +28,21 @@
 
   <div class="container py-3">
     <h2 class="text-center">Musica</h2>
+
+    <hr>
+
+    <?php
+      //Si existe la variable de sesion "msg", mostramos el mensaje que contenga
+      if(isset($_SESSION['msg'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <?= $_SESSION['msg']; ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    <?php
+    unset($_SESSION['msg']); //Eliminamos variables de sesion
+  } ?>
+
 
     <!-- Boton que llama a newModal (Ventana para agregar) -->
     <!-- lo meti en un row para poder centrar el boton mediante una fila -->
