@@ -63,7 +63,7 @@
           <td class="">
             <a href="#" class="btn btn-primary" data-bs-id="<?= $row_music['id']; ?>" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square me-1"></i>Editar</a>
 
-            <a href="#" class="btn btn-danger"><i class="bi bi-trash3-fill me-1"></i></i>Eliminar</a>
+            <a href="#" class="btn btn-danger" data-bs-id="<?= $row_music['id']; ?>" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill me-1"></i></i>Eliminar</a>
           </td>
         </tr>
         <?php } ?>
@@ -82,15 +82,18 @@
   ?>
 
   <!-- incluimos la ventana, es como si copiaramos el codigo del archivo y lo pegaramos aqui debajo -->
-  <?php include 'newModal.php' ?>
+  <?php include 'newModal.php'; ?>
 
   <?php $genres->data_seek(0); ?> <!-- Para reiniciar el ciclo while del newModal y asi poder mostrar los generos en editModal -->
 
-  <?php include 'editModal.php' ?>
+  <?php include 'editModal.php'; ?>
+
+  <?php include 'deleteModal.php'; ?>
 
   <script>
     //Codigo JS para detectar el evento cuando se muestra un modal para EDITAR
     let editModal = document.getElementById('editModal');
+    let deleteModal = document.getElementById('deleteModal');
 
     //Le indicamos el evento
     // "show.bs.modal" es cuando damos click al boton para abrir el modal
@@ -127,6 +130,13 @@
 
     })
 
+    //Codigo para eliminar modal
+    deleteModal.addEventListener('shown.bs.modal', event => {
+      let button = event.relatedTarget; //Para detectar a que boton se le dio click
+      let id = button.getAttribute('data-bs-id'); //Para pasar el id del registro que quiero modificar
+      deleteModal.querySelector('.modal-footer #id').value = id; //Le pasamos el ID a la ventana de deleteModal para que el usuario sepa que registro va a elimianr
+
+    })
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
