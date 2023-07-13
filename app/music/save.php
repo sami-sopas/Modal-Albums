@@ -21,6 +21,7 @@
         $id = $conn->insert_id;
         //print("Nuevo registro agregado con id: $id");
 
+        $_SESSION['color'] = "success";
         $_SESSION['msg'] = "Registro guardado con ID: $id";
 
         //Recibimos la imagen y hacemos validaciones
@@ -46,14 +47,17 @@
             //Regresa un booleano, le pasamos de parametro el nombre temporal
             if(!move_uploaded_file($_FILES['cover']['tmp_name'], $cover))
             {
+              $_SESSION['color'] = "danger";
               $_SESSION['msg'] .= "<br>Error al guardar imagen"; //Usamos .= para concatenar 
             }
         }
         else {
+          $_SESSION['color'] = "danger";
           $_SESSION['msg'] .= "<br>Formato de imagen no permitido";
         }
      }
      else {
+      $_SESSION['color'] = "danger";
       $_SESSION['msg'] .= "Error al guardar registro";
      }
   }

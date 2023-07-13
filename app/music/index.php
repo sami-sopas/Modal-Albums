@@ -36,13 +36,14 @@
 
     <?php
       //Si existe la variable de sesion "msg", mostramos el mensaje que contenga
-      if(isset($_SESSION['msg'])) { ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+      if(isset($_SESSION['msg']) && isset($_SESSION['color'])) { ?>
+        <div class="alert alert-<?= $_SESSION['color']; ?> alert-dismissible fade show" role="alert"> <!-- asi alert- puede variar ya sea success o danger -->
           <?= $_SESSION['msg']; ?>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
     <?php
+    unset($_SESSION['color']); //Eliminamos variables de sesion
     unset($_SESSION['msg']); //Eliminamos variables de sesion
   } ?>
 
@@ -78,8 +79,8 @@
           <th scope="row"> <?= $row_music['id']; ?> </th>
           <td> <?= $row_music['name']; ?> </td>
           <td> <?= $row_music['description']; ?> </td>
-          <td> <?= $row_music['genre']; ?> </td>
-          <td><img src="<?= $dir . $row_music['id'] . '.jpg'; ?> " width=100px></td> <!-- Contactenamos lo del directorio con el id para traernos la imagen -->
+          <td> <?= $row_music['genre']; ?> </td>         <!-- Con eso se envia otro dato para actualizar la cache del navegador -->
+          <td><img src="<?= $dir . $row_music['id'] . '.jpg?n=' . time(); ?> " width=100  height=100 ></td> <!-- Contactenamos lo del directorio con el id para traernos la imagen -->
           <td class="">
             <a href="#" class="btn btn-primary" data-bs-id="<?= $row_music['id']; ?>" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square me-1"></i>Editar</a>
 
@@ -128,6 +129,7 @@
       let inputName = editModal.querySelector('.modal-body #name');
       let inputDescription = editModal.querySelector('.modal-body #description');
       let inputGenre = editModal.querySelector('.modal-body #genre');
+      let cover = editModal.querySelector('.modal-body #img_cover');
 
       //Peticion Ajax para pasar la informacion al modal
       let url = "getSong.php";
@@ -145,6 +147,7 @@
         inputName.value = data.name
         inputDescription.value = data.description
         inputGenre.value = data.id_genre
+        cover.src = '<?= $dir ?>' + data.id + '.jpg'
 
       }).catch(err => console.log(err));
 
