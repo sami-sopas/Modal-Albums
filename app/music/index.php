@@ -11,6 +11,9 @@
                g.name as genre FROM music AS m INNER JOIN genre AS g ON m.id_genre = g.id";
 
   $music = $conn->query($sqlMusic);
+
+  //Para poder ver la imagen, primero definimos el directorio
+  $dir = "covers/";
 ?>
 
 <!doctype html>
@@ -76,7 +79,7 @@
           <td> <?= $row_music['name']; ?> </td>
           <td> <?= $row_music['description']; ?> </td>
           <td> <?= $row_music['genre']; ?> </td>
-          <td></td>
+          <td><img src="<?= $dir . $row_music['id'] . '.jpg'; ?> " width=100px></td> <!-- Contactenamos lo del directorio con el id para traernos la imagen -->
           <td class="">
             <a href="#" class="btn btn-primary" data-bs-id="<?= $row_music['id']; ?>" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square me-1"></i>Editar</a>
 
