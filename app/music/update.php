@@ -52,10 +52,11 @@
          $_SESSION['color'] = "danger";
           $_SESSION['msg'] .= "<br>Formato de imagen no permitido";
         }
-     }else {
-      $_SESSION['color'] = "danger";
-      $_SESSION['msg'] = "Error al actualizar registro";
      }
+   }
+   else {
+    $_SESSION['color'] = "danger";
+    $_SESSION['msg'] = "Error al actualizar registro";
    }
 
      //Nos volvemos a posicionar en el inicio

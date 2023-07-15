@@ -34,13 +34,13 @@
                 </select>
               </div>
 
-              <div class="mb-3">
-                <img id="img_cover" width=100px src="" alt="">
-              </div>
-
               <div class="mb-3"> <!-- Portada -->
                 <label for="cover" class="form-label">Portada:</label>
                 <input type="file" name="cover" id="cover" class="form-control" accept="image/jpeg">
+              </div>
+
+              <div class="mb-3 d-flex justify-content-center ">
+                <img id="img_cover" width=125px src="" alt="" class="border border-5 rounded border-black">
               </div>
 
               <div class="">

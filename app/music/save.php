@@ -22,7 +22,7 @@
         //print("Nuevo registro agregado con id: $id");
 
         $_SESSION['color'] = "success";
-        $_SESSION['msg'] = "Registro guardado con ID: $id";
+        $_SESSION['msg'] = "Registro guardado con ID: <b>$id</b>";
 
         //Recibimos la imagen y hacemos validaciones
         if($_FILES['cover']['error'] == UPLOAD_ERR_OK) //Si sale 0, es porque es correcto
@@ -53,14 +53,14 @@
         }
         else {
           $_SESSION['color'] = "danger";
-          $_SESSION['msg'] .= "<br>Formato de imagen no permitido";
+          $_SESSION['msg'] = "<br>Formato de imagen no permitido";
         }
      }
-     else {
-      $_SESSION['color'] = "danger";
-      $_SESSION['msg'] .= "Error al guardar registro";
-     }
   }
+  else {
+    $_SESSION['color'] = "danger";
+    $_SESSION['msg'] = "Error al guardar registro o imagen no adjuntada";
+   }
 
      //Nos volvemos a posicionar en el inicio
      header('Location: index.php');

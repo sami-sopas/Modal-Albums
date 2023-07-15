@@ -18,9 +18,6 @@
       //Construccion de la ruta con el nombre
       $dir = "covers"; //Definimos la carpeta donde se guardaran las imagenes
 
-      $info_img = pathinfo($_FILES['cover']['name']); //Informacion sobre la imagen, regresa un arreglo
-      $info_img['extension']; 
-
       $cover = $dir . '/'.$id.'.jpg'; //Para construir el nombre y extension de la imagen recibida 
 
         if(file_exists($cover)){

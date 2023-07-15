@@ -8,7 +8,7 @@
   /* query para llenas las tablas con la informacion, usando un inner join
      para ligar con la llave foranea (genero) */ 
   $sqlMusic = "SELECT m.id, m.name, m.description,
-               g.name as genre FROM music AS m INNER JOIN genre AS g ON m.id_genre = g.id";
+               g.name as genre FROM music AS m INNER JOIN genre AS g ON m.id_genre = g.id ORDER BY m.id ASC";
 
   $music = $conn->query($sqlMusic);
 
@@ -25,9 +25,13 @@
   <title>CRUD Modal</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,600;0,700;1,400&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 
-<body>
+<body class="min-vh-100">
 
   <div class="container py-3">
     <h2 class="text-center">Musica</h2>
@@ -50,37 +54,40 @@
 
     <!-- Boton que llama a newModal (Ventana para agregar) -->
     <!-- lo meti en un row para poder centrar el boton mediante una fila -->
-    <div class="row justify-content-end">
+    <div class="row justify-content-between mt-4">
       <div class="col-auto">
-      <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newModal">
-        <i class="bi bi-plus-circle-fill"></i>
-           Nuevo registro
+        <h2>Albumes</h2>
+      </div>
+      <div class="col-auto">
+        <a href="#" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#newModal">
+          <i class="bi bi-plus-circle-fill"></i>
+            Nuevo registro
         </a>
       </div>
     </div>
-    <table class="table table-sm table-striped table-hover mt-4 text-center">
-      <thead> <!-- Encabezado de la tabla -->
+
+    <table class="table table-sm table-striped table-hover mt-4 text-center rounded rounded-3 overflow-hidden">
+      <thead class="table-dark "> <!-- Encabezado de la tabla -->
         <tr>
-          <th>#</th>
-          <th>Nombre</th>
-          <th>Descripcion</th>
-          <th>Genero</th>
-          <th>Portada</th>
-          <th>Accion</th>
+          <th class="py-2">#</th>
+          <th class="py-2">Nombre</th>
+          <th class="py-2">Descripcion</th>
+          <th class="py-2">Genero</th>
+          <th class="py-2">Portada</th>
+          <th class="py-2">Accion</th>
         </tr>
       </thead>
 
       <tbody> <!-- Cuerpo de la tabla -->
-
       <?php /* Usar <?= ?> es el quivalente a usar <?php echo; ?> */ ?>
 
       <?php while($row_music = $music->fetch_assoc()) {  ?>
-        <tr>
+        <tr class="align-middle">
           <th scope="row"> <?= $row_music['id']; ?> </th>
           <td> <?= $row_music['name']; ?> </td>
           <td> <?= $row_music['description']; ?> </td>
           <td> <?= $row_music['genre']; ?> </td>         <!-- Con eso se envia otro dato para actualizar la cache del navegador -->
-          <td><img src="<?= $dir . $row_music['id'] . '.jpg?n=' . time(); ?> " width=100  height=100 ></td> <!-- Contactenamos lo del directorio con el id para traernos la imagen -->
+          <td><img src="<?= $dir . $row_music['id'] . '.jpg?n=' . time(); ?> " width=125  height=125 class="border border-5 rounded border-black" ></td> <!-- Contactenamos lo del directorio con el id para traernos la imagen -->
           <td class="">
             <a href="#" class="btn btn-primary" data-bs-id="<?= $row_music['id']; ?>" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square me-1"></i>Editar</a>
 
@@ -113,8 +120,33 @@
 
   <script>
     //Codigo JS para detectar el evento cuando se muestra un modal para EDITAR
+    let newModal = document.getElementById('newModal');
     let editModal = document.getElementById('editModal');
     let deleteModal = document.getElementById('deleteModal');
+      
+    /*
+    //Evento para que cuando de click a nuevo album, se enfoque el nombre para escribir
+    newMdoal.addEventListener('shown.bs.modal',event => {
+      newModal.querySelector('.modal-body #name').focust();
+    })
+
+    //Evento para dejar vacios los campos al llamar a un modal para no dejar la informacion anterior
+    newModal.addEventListener('hide.bs.modal', event => {
+      newModal.querySelector('.modal-body #name').value = "";
+      newModal.querySelector('.modal-body #description').value = "";
+      newModal.querySelector('.modal-body #genre').value = "";
+      newModal.querySelector('.modal-body #poster').value = "";
+    })
+
+    //Lo mismo pero para el modal de editar
+    editModal.addEventListener('hide.bs.modal', event => {
+      editModal.querySelector('.modal-body #name').value = "";
+      editModal.querySelector('.modal-body #description').value = "";
+      editModal.querySelector('.modal-body #genre').value = "";
+      editModal.querySelector('.modal-body #img_cover').value = "";
+      editModal.querySelector('.modal-body #poster').value = "";
+    })
+    */
 
     //Le indicamos el evento
     // "show.bs.modal" es cuando damos click al boton para abrir el modal
